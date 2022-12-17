@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.29.0-focal
+      options: --user 1001 # ← THIS IS THE IMPORTANT LINE!
     steps:
       - uses: actions/checkout@v3
         with:
