@@ -23,11 +23,16 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.29.0-focal
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '18'
+
+      - uses: the-guild-org/shared-config/setup@main
+        name: setup env
         with:
-          node-version: '18'
-      - name: Install dependencies
-        run: npm ci
+          nodeVersion: 18
+          packageManager: pnpm
+
       - name: Run your tests
-        run: npx playwright test
+        run: pnpm test
