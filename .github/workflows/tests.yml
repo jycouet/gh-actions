@@ -19,15 +19,16 @@ on:
 jobs:
   playwright:
     name: 'Playwright Tests'
-    # runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.29.0-focal
-      options: --user 1001 # ← THIS IS THE IMPORTANT LINE!
 
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-      runs-on: ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
+    container:
+      image: mcr.microsoft.com/playwright:v1.29.0-focal
+      options: --user 1001 # ← IMPORTANT LINE TO be able to write files
 
     steps:
       - uses: actions/checkout@v3
