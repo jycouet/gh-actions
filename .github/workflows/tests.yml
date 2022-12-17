@@ -1,0 +1,33 @@
+# name: CI Checks
+
+# # run this workflow on specific events in github
+# on:
+#     # pull requests to master
+#     pull_request:
+#         paths:
+#             - '**'
+
+#     # every commit on master
+#     push:
+#         branches:
+#             - main
+#             steps:
+name: CI
+on:
+  push:
+    branches: [main]
+jobs:
+  playwright:
+    name: 'Playwright Tests'
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.29.0-focal
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run your tests
+        run: npx playwright test
